@@ -22,17 +22,13 @@ pwm3.enable()
 
 try:
 	while True:
-            # Change duty cycle to .5ms
-	    	pwm3.duty_cycle_ns = 0.5*1000000
-	    	time.sleep(1.5)
+		pwm3.duty_cycle_ns = 0.5*1000000 # Change duty cycle to .5ms 
+		time.sleep(1.5)
+		pwm3.duty_cycle_ns = 1.5*1000000 # Change duty cycle to 1.5ms
+		time.sleep(1.5)
+		pwm3.duty_cycle_ns = 2.5*1000000 # Change duty cycle to 2.5ms
+		time.sleep(1.5)
 
-	    	# Change duty cycle to 1.5ms
-	    	pwm3.duty_cycle_ns = 1.5*1000000
-	    	time.sleep(1.5)
-
-			# Change duty cycle to 2.5ms
-			pwm3.duty_cycle_ns = 2.5*1000000
-			time.sleep(1.5)
 
 except KeyboardInterrupt:
 	pwm.close()
