@@ -24,10 +24,12 @@ try:
 	while True:
 		pwm3.duty_cycle = 0.25 # Change duty cycle to .5ms 
 		time.sleep(1.5)
-		pwm3.duty_cycle_ns = 0.5 # Change duty cycle to 1.5ms
+		pwm3.duty_cycle = 0.5 # Change duty cycle to 1.5ms
 		time.sleep(1.5)
-		pwm3.duty_cycle_ns = 0.75 # Change duty cycle to 2.5ms
+		pwm3.duty_cycle = 0.75 # Change duty cycle to 2.5ms
 		time.sleep(1.5)
+		print("in while loop")
+		time.sleep(2)
 
 
 except KeyboardInterrupt:
