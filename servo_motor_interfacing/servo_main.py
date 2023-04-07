@@ -2,7 +2,7 @@ from periphery import PWM
 import time
 
 # Open PWM chip 3, channel 0
-pwm3 = PWM(2,0)
+pwm3 = PWM(1,0)
 
 # Set frequency to 50Hz
 pwm3.frequency = 50
