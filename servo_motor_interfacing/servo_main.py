@@ -7,6 +7,8 @@ pwm = PWM(0, 0)
 # Set frequency to 50Hzs
 pwm.frequency = 50
 
+pwm.duty_cycle = 0.05 # Change duty cycle to .5ms 
+
 # in servo motor,
 # 1ms pulse for 0 degree (LEFT)
 # 1.5ms pulse for 90 degree (MIDDLE)
