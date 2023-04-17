@@ -21,9 +21,9 @@ try :
 
         while echo.read() == True :
             pluse_end = time.time()
+            break
 
         pluse_duration = pluse_end - pluse_start
-
 
         distance = pluse_duration * 17150
 
