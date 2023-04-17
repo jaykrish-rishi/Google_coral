@@ -17,7 +17,7 @@ try :
         time.sleep(0.00001)
         trig.write(False)
 
-        while ehco.read() == False :
+        while echo.read() == False :
 
         while echo.read() == True :
             pluse_start = time.time()
