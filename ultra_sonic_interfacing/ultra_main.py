@@ -10,18 +10,20 @@ time.sleep(2)
 
 print ("place the object")
 
+def ul_fun
+
 try :
     while True :
         trig.write(True)
         time.sleep(0.00001)
         trig.write(False)
 
-        while echo.read() == False:
-            pluse_start = time.time()
+        while ehco.read() == False :
 
         while echo.read() == True :
-            pluse_end = time.time()
+            pluse_start = time.time()
             break
+        pluse_end = time.time()
 
         pluse_duration = pluse_end - pluse_start
 
