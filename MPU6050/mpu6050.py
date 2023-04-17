@@ -4,7 +4,7 @@ from periphery import GPIO, I2C
 
 
 # Open i2c-0 controller    
-i2c2 = I2C("/dev/i2c-1")
+i2c = I2C("/dev/i2c-1")
 
 
 # Read byte at address 0x100 of EEPROM at 0x50
@@ -32,8 +32,6 @@ GYRO_Z  = 0x47
 
 TEMP = 0x41
 
-bus = smbus.SMBus(1)
-
 Device_Address = 0x68   # device address
 
 AxCal=0
@@ -54,45 +52,45 @@ GzCal=0
 def InitMPU():
 
     #bus.write_byte_data(Device_Address, DIV, 7)
-    msgs = [I2C.Message([0x00]), read=False)]
+    msgs = [I2C.Message([0x00], read=False)]
     i2c.transfer(Device_Address, msgs)
 
-    msgs = [I2C.Message([7]), read=False)]
+    msgs = [I2C.Message([7], read=False)]
     i2c.transfer(DIV, msgs)
 
     #bus.write_byte_data(Device_Address, PWR_M, 1)
-    msgs = [I2C.Message([0x00]), read=False)]
+    msgs = [I2C.Message([0x00], read=False)]
     i2c.transfer(Device_Address, msgs)
 
-    msgs = [I2C.Message([1]), read=False)]
+    msgs = [I2C.Message([1], read=False)]
     i2c.transfer(PWR_M, msgs)
 
     #bus.write_byte_data(Device_Address, CONFIG, 0)
-    msgs = [I2C.Message([0x00]), read=False)]
+    msgs = [I2C.Message([0x00], read=False)]
     i2c.transfer(Device_Address, msgs)
 
-    msgs = [I2C.Message([0]), read=False)]
+    msgs = [I2C.Message([0], read=False)]
     i2c.transfer(CONFIG, msgs)
     
     #bus.write_byte_data(Device_Address, GYRO_CONFIG, 24)
-    msgs = [I2C.Message([0x00]), read=False)]
+    msgs = [I2C.Message([0x00], read=False)]
     i2c.transfer(Device_Address, msgs)
 
-    msgs = [I2C.Message([0x18]), read=False)]      # +-2000 deg/s
+    msgs = [I2C.Message([0x18], read=False)]      # +-2000 deg/s
     i2c.transfer(GYRO_CONFIG, msgs)
 
     #bus.write_byte_data(Device_Address, ACC_CONFIG, 24)
-    msgs = [I2C.Message([0x00]), read=False)]
+    msgs = [I2C.Message([0x00], read=False)]
     i2c.transfer(Device_Address, msgs)
 
-    msgs = [I2C.Message([0x18]), read=False)]      # +- 16g
+    msgs = [I2C.Message([0x18], read=False)]      # +- 16g
     i2c.transfer(ACC_CONFIG, msgs)
     
     #bus.write_byte_data(Device_Address, INT_EN, 1)
-    msgs = [I2C.Message([0x00]), read=False)]
+    msgs = [I2C.Message([0x00], read=False)]
     i2c.transfer(Device_Address, msgs)
 
-    msgs = [I2C.Message([1]), read=False)]
+    msgs = [I2C.Message([1], read=False)]
     i2c.transfer(INT_EN, msgs)
     
     time.sleep(1)
@@ -132,12 +130,11 @@ def accel():
 
     #print "X="+str(Ax)
 
-    print(" Ax = %f , Ay = %f , Az = %f ".format{Ax,Ay,Az})
+    print(" Ax = %f , Ay = %f , Az = %f "%(Ax,Ay,Az))
 
     time.sleep(.01)
 
 def gyro():
-    
     global GxCal
     global GyCal
     global GzCal
@@ -150,74 +147,73 @@ def gyro():
     Gy = y/131.0 - GyCal
     Gz = z/131.0 - GzCal
     
-    print(" Gx = %f , Gy = %f , Gz = %f ".format{Gx,Gy,Gz})
+    print(" Gx = %f , Gy = %f , Gz = %f "%(Gx,Gy,Gz))
     time.sleep(.01)
 
  
 def temp():
-   
-   tempRow=readMPU(TEMP)
-   tempC=(tempRow / 340.0) + 36.53
+    tempRow=readMPU(TEMP)
+    tempC=(tempRow / 340.0) + 36.53
 
-   tempC="%.2f" %tempC
+    tempC="%.2f" %tempC
 
-   print("tempC : ",tempC) 
-   time.sleep(.2)
+    print("tempC : ",tempC) 
+    time.sleep(.2)
 
 
 def calibrate():
+    
+    print("Calibrate....")
    
-   print("Calibrate....")
-   
-   global AxCal
-   global AyCal
-   global AzCal
+    global AxCal
+    global AyCal
+    global AzCal
 
-   x=0
-   y=0
-   z=0
+    x=0
+    y=0
+    z=0
 
-   for i in range(50):
-    x = x + readMPU(ACCEL_X)
-    y = y + readMPU(ACCEL_Y)
-    z = z + readMPU(ACCEL_Z)
+    for i in range(50):
+        x = x + readMPU(ACCEL_X)
+        y = y + readMPU(ACCEL_Y)
+        z = z + readMPU(ACCEL_Z)
 
-   x= x/50
-   y= y/50
-   z= z/50
+    x= x/50
+    y= y/50
+    z= z/50
 
-   AxCal = x/16384.0
-   AyCal = y/16384.0 
-   AzCal = z/16384.0
+    AxCal = x/16384.0
+    AyCal = y/16384.0 
+    AzCal = z/16384.0
 
-   print("AxCal : ",AxCal) 
-   print("AyCal : ",AyCal) 
-   print("AzCal : ",AzCal) 
+    print("AxCal : ",AxCal) 
+    print("AyCal : ",AyCal) 
+    print("AzCal : ",AzCal) 
 
-   global GxCal
-   global GyCal
-   global GzCal
+    global GxCal
+    global GyCal
+    global GzCal
 
-   x=0
-   y=0
-   z=0
+    x=0
+    y=0
+    z=0
 
-   for i in range(50):
-    x = x + readMPU(GYRO_X)
-    y = y + readMPU(GYRO_Y)
-    z = z + readMPU(GYRO_Z)
+    for i in range(50):
+        x = x + readMPU(GYRO_X)
+        y = y + readMPU(GYRO_Y)
+        z = z + readMPU(GYRO_Z)
 
-   x= x/50
-   y= y/50
-   z= z/50
+    x= x/50
+    y= y/50
+    z= z/50
 
-   GxCal = x/131.0
-   GyCal = y/131.0
-   GzCal = z/131.0
+    GxCal = x/131.0
+    GyCal = y/131.0
+    GzCal = z/131.0
 
-   print("GxCal : ",GxCal) 
-   print("GyCal : ",GyCal) 
-   print("GzCal : ",GzCal) 
+    print("GxCal : ",GxCal) 
+    print("GyCal : ",GyCal) 
+    print("GzCal : ",GzCal) 
 
 
 print("MPU6050 Interface")
@@ -226,12 +222,9 @@ calibrate()
 
 
 while 1:
-  
-  InitMPU()
-  temp()
-  time.sleep(1)  
-  accel()
-  time.sleep(1)
-  gyro()
-
-
+    InitMPU()
+    temp()
+    time.sleep(1)  
+    accel()
+    time.sleep(1)
+    gyro()
