@@ -12,9 +12,9 @@ print ("place the object")
 
 try :
     while True :
-        trig.write(True)
-        time.sleep(0.00001)
-        trig.write(False)
+        trig.write(1)
+        time.sleep(0.0001)
+        trig.write(0)
 
         while echo.read() == 0:
             pluse_start = time.time()
