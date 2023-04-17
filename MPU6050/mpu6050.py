@@ -52,44 +52,29 @@ GzCal=0
 def InitMPU():
 
     #bus.write_byte_data(Device_Address, DIV, 7)
-    msgs = [I2C.Message([DIV]),I2C.Message([0x07])]
+    msgs = [I2C.Message([DIV]), I2C.Message([0x07])]
     i2c.transfer(Device_Address, msgs)
 
     #bus.write_byte_data(Device_Address, PWR_M, 1)
-    msgs = [I2C.Message([0x00])]
+    msgs = [I2C.Message([PWR_M]), I2C.Message([0x01])]
     i2c.transfer(Device_Address, msgs)
-
-    msgs = [I2C.Message([0x01])]
-    i2c.transfer(PWR_M, msgs)
 
     #bus.write_byte_data(Device_Address, CONFIG, 0)
-    msgs = [I2C.Message([0x00])]
+    msgs = [I2C.Message([CONFIG]), I2C.Message([0x00])]
     i2c.transfer(Device_Address, msgs)
 
-    msgs = [I2C.Message([0x00])]
-    i2c.transfer(CONFIG, msgs)
-    
     #bus.write_byte_data(Device_Address, GYRO_CONFIG, 24)
-    msgs = [I2C.Message([0x00])]
+    msgs = [I2C.Message([GYRO_CONFIG]), I2C.Message([0x18])]           # +-2000 deg/s
     i2c.transfer(Device_Address, msgs)
 
-    msgs = [I2C.Message([0x18])]      # +-2000 deg/s
-    i2c.transfer(GYRO_CONFIG, msgs)
-
-    #bus.write_byte_data(Device_Address, ACC_CONFIG, 24)
-    msgs = [I2C.Message([0x00])]
+    #bus.write_byte_data(Device_Address, ACC_CONFIG, 24)                # +- 16g
+    msgs = [I2C.Message([ACC_CONFIG]), I2C.Message([0x18])]
     i2c.transfer(Device_Address, msgs)
 
-    msgs = [I2C.Message([0x18])]      # +- 16g
-    i2c.transfer(ACC_CONFIG, msgs)
-    
     #bus.write_byte_data(Device_Address, INT_EN, 1)
-    msgs = [I2C.Message([0x00])]
+    msgs = [I2C.Message([INT_EN]), I2C.Message([0x01])]
     i2c.transfer(Device_Address, msgs)
 
-    msgs = [I2C.Message([0x01])]
-    i2c.transfer(INT_EN, msgs)
-    
     time.sleep(1)
 
 
