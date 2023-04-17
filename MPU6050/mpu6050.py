@@ -52,7 +52,7 @@ GzCal=0
 def InitMPU():
 
     #bus.write_byte_data(Device_Address, DIV, 7)
-    msgs = [I2C.Message([DIV]), I2C.Message([0x07])]
+    msgs = [I2C.Message([DIV ,0x07])]
     i2c.transfer(Device_Address, msgs)
 
     #bus.write_byte_data(Device_Address, PWR_M, 1)
