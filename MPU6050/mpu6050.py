@@ -96,7 +96,7 @@ def readMPU(addr):
     if(value > 32768):
         value = value - 65536
     
-    print("high = %x low = %x "%(high,low))
+    print("high = %d low = %d "%(high,low))
 
     return value
 
