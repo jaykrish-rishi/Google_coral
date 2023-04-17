@@ -2,9 +2,9 @@ from periphery import PWM
 import time
 
 # Open PWM chip 3, channel 0
-pwm3 = PWM(1,0)
+pwm3 = PWM(2, 0)
 
-# Set frequency to 50Hz
+# Set frequency to 50Hzs
 pwm3.frequency = 50
 
 # in servo motor,
