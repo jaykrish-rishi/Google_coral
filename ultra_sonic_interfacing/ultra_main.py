@@ -12,14 +12,14 @@ print ("place the object")
 
 try :
     while True :
-        trig.write(1)
-        time.sleep(0.0001)
-        trig.write(0)
+        trig.write(True)
+        time.sleep(0.00001)
+        trig.write(False)
 
-        while echo.read() == 0:
+        while echo.read() == False:
             pluse_start = time.time()
 
-        while echo.read() == 1 :
+        while echo.read() == True :
             pluse_end = time.time()
 
         pluse_duration = pluse_end - pluse_start
