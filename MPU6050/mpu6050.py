@@ -82,12 +82,12 @@ def InitMPU():
 def readMPU(addr):
     
     # high = bus.read_byte_data(Device_Address, addr)
-    msgs = [I2C.Message([addr]), I2C.Message([], read=True)]
+    msgs = [I2C.Message([addr]), I2C.Message([0x00], read=True)]
     i2c.transfer(Device_Address, msgs)
     high = msgs[1].data[0]
 
     # low = bus.read_byte_data(Device_Address, addr+1)
-    msgs = [I2C.Message([addr+1]), I2C.Message([], read=True)]
+    msgs = [I2C.Message([addr+1]), I2C.Message([0x00], read=True)]
     i2c.transfer(Device_Address, msgs)
     low = msgs[1].data[0]
 
@@ -96,6 +96,8 @@ def readMPU(addr):
     if(value > 32768):
         value = value - 65536
     
+    print("high = %x low = %x "%(high,low))
+
     return value
 
 
