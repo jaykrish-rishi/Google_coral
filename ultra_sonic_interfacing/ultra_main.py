@@ -19,7 +19,7 @@ try :
         while echo.read() == 0:
             pluse_start = time.time()
 
-        while echo,read() == 1 :
+        while echo.read() == 1 :
             pluse_end = time.time()
 
         pluse_duration = pluse_end - pluse_start
