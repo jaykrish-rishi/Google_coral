@@ -10,7 +10,6 @@ time.sleep(2)
 
 print ("place the object")
 
-def ul_fun
 
 try :
     while True :
