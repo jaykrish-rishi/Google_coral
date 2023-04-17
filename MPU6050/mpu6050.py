@@ -64,11 +64,11 @@ def InitMPU():
     i2c.transfer(Device_Address, msgs)
 
     #bus.write_byte_data(Device_Address, GYRO_CONFIG, 24)
-    msgs = [I2C.Message([GYRO_CONFIG, 0x18])]           # +-2000 deg/s
+    msgs = [I2C.Message([GYRO_CONFIG, 0x00])]           # +-250 deg/s
     i2c.transfer(Device_Address, msgs)
 
     #bus.write_byte_data(Device_Address, ACC_CONFIG, 24)                # +- 16g
-    msgs = [I2C.Message([ACC_CONFIG, 0x18])]
+    msgs = [I2C.Message([ACC_CONFIG, 0x00])]
     i2c.transfer(Device_Address, msgs)
 
     #bus.write_byte_data(Device_Address, INT_EN, 1)
@@ -91,7 +91,7 @@ def readMPU(addr):
     i2c.transfer(Device_Address, msgs)
     low = msgs[1].data[0]
 
-    value = ((high << 8) | low)
+    value = ((high << 8) or low)
     
     if(value > 32768):
         value = value - 65536
