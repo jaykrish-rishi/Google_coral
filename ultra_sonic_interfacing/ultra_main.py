@@ -16,8 +16,9 @@ try :
         trig.write(True)
         time.sleep(0.00001)
         trig.write(False)
-
+        
         while echo.read() == False :
+            pass
 
         while echo.read() == True :
             pluse_start = time.time()
