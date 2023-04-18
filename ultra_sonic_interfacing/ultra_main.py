@@ -18,11 +18,11 @@ try :
         trig.write(False)
         
         while echo.read() == False :
-            pass
+            print("in 0 read")
 
         while echo.read() == True :
             pluse_start = time.time()
-            break
+            print("in 1 read")
         pluse_end = time.time()
 
         pluse_duration = pluse_end - pluse_start
