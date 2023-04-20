@@ -1,12 +1,10 @@
-import paho.mqtt.client as mqtt
+#import paho.mqtt.client as mqtt
+import paho.mqtt.server as mqtt
 import time
 
 from periphery import GPIO
 
 led = GPIO("/dev/gpiochip2", 13, "out") #pin 37
-
-
-#import paho.mqtt.server as mqtt
 
 # Define callback functions
 def on_connect(client, userdata, flags, rc):
