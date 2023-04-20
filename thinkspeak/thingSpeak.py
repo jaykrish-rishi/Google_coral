@@ -2,6 +2,8 @@ import thingspeak
 import time
 import Adafruit_DHT
 
+sensor = Adafruit_DHT.DHT11
+pin = 3 
 
 channel_id = 2114719 # put here the ID of the channel you created before
 
