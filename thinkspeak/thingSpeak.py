@@ -1,6 +1,6 @@
 import thingspeak
 import time
-from adafruit/Adafruit_Python_DHT import Adafruit_DHT
+import Adafruit_DHT
 
 sensor = Adafruit_DHT.DHT11
 pin = 3 
