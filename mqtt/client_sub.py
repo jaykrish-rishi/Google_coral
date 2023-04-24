@@ -6,31 +6,6 @@ from periphery import GPIO
 
 led = GPIO("/dev/gpiochip2", 13, "out") #pin 37
 
-# Define callback functions
-# def on_connect(client, userdata, flags, rc):
-#     print("Connected with result code "+str(rc))
-
-# def on_message(client, userdata, message):
-#     print(message.topic+" "+str(message.payload))
-
-# # Create an MQTT broker instance
-# broker = mqtt.Mosquitto("myBroker")
-
-# # Set the callback functions
-# broker.on_connect = on_connect
-# broker.on_message = on_message
-
-# # Start the MQTT broker
-# broker.connect("localhost", 1883)
-# broker.subscribe("test/topic")
-
-# try:
-#     broker.loop_forever()
-# except KeyboardInterrupt:
-#     broker.disconnect()
-
-
-
 def on_connect(client, userdata, flags, rc):
    global flag_connected
    flag_connected = 1
@@ -61,6 +36,8 @@ client = mqtt.Client("rpi_client1") #this should be a unique name
 flag_connected = 0
 
 client.on_connect = on_connect
+client.on_disconnect = on_connect
+client.connect('localhost',1883)
 
 try:
     client.loop_start()
